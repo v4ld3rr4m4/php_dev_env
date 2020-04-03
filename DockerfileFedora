@@ -1,0 +1,15 @@
+FROM fedora:31
+RUN sudo dnf -y update
+RUN dnf -y install https://rpms.remirepo.net/fedora/remi-release-31.rpm
+RUN dnf config-manager --set-enabled remi && dnf config-manager --set-enabled remi-php74
+
+RUN dnf module install php:remi-7.4 && dnf update
+
+COPY code/ /usr/share/nginx/html/
+COPY *.html /usr/share/nginx/html/
+
+COPY default.conf /etc/nginx/conf.d/
+
+EXPOSE 9000
+
+

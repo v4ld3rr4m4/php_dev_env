@@ -1,0 +1,12 @@
+FROM nginx:latest
+RUN apk update && apk upgrade
+RUN apk add php7 php7-fpm 
+
+COPY code/ /usr/share/nginx/html/
+COPY *.html /usr/share/nginx/html/
+
+COPY default.conf /etc/nginx/conf.d/
+
+EXPOSE 9000
+
+
